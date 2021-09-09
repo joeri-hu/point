@@ -368,13 +368,13 @@ noexcept(cv::is_conversion_noexcept_both_v<T1, T2>)
 //////////////////////// comparison >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //////////////////////// equality >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-template<typename T, typename C>
-constexpr auto operator==(point<T, C> const& lhs, point<T, C> const& rhs)
+template<typename T1, typename T2, typename C>
+constexpr auto operator==(point<T1, C> const& lhs, point<T2, C> const& rhs)
 noexcept(cv::is_conversion_noexcept_v<C>) -> bool
 { return lhs.x == rhs.x and lhs.y == rhs.y; }
 
-template<typename T, typename C>
-constexpr auto operator!=(point<T, C> const& lhs, point<T, C> const& rhs)
+template<typename T1, typename T2, typename C>
+constexpr auto operator!=(point<T1, C> const& lhs, point<T2, C> const& rhs)
 noexcept(cv::is_conversion_noexcept_v<C>) -> bool
 { return not (lhs == rhs); }
 
