@@ -15,6 +15,28 @@ namespace internal {
 
 //////////////////////// versions >>>>>>>>>>>>>>>>>>>>>>>>
 
+// Due to the simplistic nature of this class, adhering to the requirements of
+// a POD-type seems canonical. A downside of this constraint is that the class
+// can't have any in-class initializers, making it possible to create
+// uninitialized objects. This can be dangerous and opposes the notion of most
+// well-regarded C++ guidelines.
+//     C++17 allows trivial aggregate-types to prevent uninitialized object
+// creation. This can be accomplished by deleting the default constructor.
+// Admittedly, this concept can be considered to be kind of counter-intuitive.
+//
+// The rules for aggregate initialization have changed since C++20, causing
+// this type of construction to be no longer possible. This raised a rather
+// interesting question: How to adhere to the aggregrate initialization rules
+// of each version of the C++ standard without obstructing the compiler?
+//
+// To explore this question a bit further and in an attempt to accommodate both
+// views, a different implementation is provided for each C++ version.
+// Preferably, to prevent the duplication of member-function declarations or
+// definitions, a base class could be shared among the version-specific
+// implementations. Unfortunately, an aggregate type which derives from another
+// class requires an awful form of aggregate initialization: {0} --> {{}, 0}
+// For this reason, the design of this class has become somewhat dry-looking.
+
 inline namespace cpp17 {
 
 template<typename T, typename C>
