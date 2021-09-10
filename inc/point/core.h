@@ -163,13 +163,13 @@ template<typename T, typename C = cv::conversion::truncate_on_narrowing>
 using point = internal::point<T, C>;
 
 template<typename T>
-using point_cv = point<T, cv::conversion::convert_on_narrowing>;
+using point_v = point<T, cv::conversion::convert_on_narrowing>;
 
 template<typename T>
-using point_as = point<T, cv::conversion::assert_on_narrowing>;
+using point_a = point<T, cv::conversion::assert_on_narrowing>;
 
 template<typename T>
-using point_rn = point<T, cv::conversion::throw_on_out_of_range>;
+using point_r = point<T, cv::conversion::throw_on_out_of_range>;
 
 //////////////////////// types >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
