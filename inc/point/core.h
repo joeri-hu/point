@@ -173,10 +173,10 @@ using point_r = point<T, cv::conversion::throw_on_out_of_range>;
 
 //////////////////////// types >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-using point_s  = point<short>;
+using point_s  = point<short int>;
 using point_i  = point<int>;
-using point_l  = point<long>;
-using point_ll = point<long long>;
+using point_l  = point<long int>;
+using point_ll = point<long long int>;
 using point_f  = point<float>;
 using point_d  = point<double>;
 using point_ld = point<long double>;
