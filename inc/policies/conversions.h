@@ -80,8 +80,9 @@ inline constexpr auto is_conversion_noexcept_neither_v
 namespace internal {
 
 template<typename From, typename To, typename C>
-struct policy_impl {
-    constexpr policy_impl() = delete;
+class policy {
+public:
+    constexpr policy() = delete;
 
     template<typename = C>
     static constexpr auto convert(From src)
@@ -108,12 +109,30 @@ struct policy_impl {
     static constexpr auto convert<conversion::throw_on_out_of_range>(From src)
     noexcept(is_conversion_noexcept_v<C>) -> To {
         if constexpr (ts::is_narrowing_v<From, To>) {
-            if (src < std::numeric_limits<To>::min()
-                or src > std::numeric_limits<To>::max())
-            { throw std::out_of_range{"conversion results in information loss"}; }
+            if (is_out_of_range(src)) {
+                throw std::out_of_range{"conversion results in information loss"};
+            }
         }
         return convert<conversion::truncate_on_narrowing>(src);
     }
+private:
+    static constexpr auto is_out_of_range(From src) noexcept -> bool {
+        if constexpr (std::is_signed_v<From>) {
+            return exceeds_limit_min(src)
+                or exceeds_limit_max(src);
+        }
+        return exceeds_limit_max(src);
+    }
+
+    static constexpr auto exceeds_limit_min(From src) noexcept -> bool {
+        if constexpr (std::is_signed_v<To>) {
+            return src < std::numeric_limits<To>::min();
+        }
+        return src < 0;
+    }
+
+    static constexpr auto exceeds_limit_max(From src) noexcept -> bool
+    { return src > std::numeric_limits<To>::max(); }
 };
 
 } // namespace internal
@@ -123,7 +142,7 @@ struct policy_impl {
 template<typename From, typename To, typename C,
     typename = ts::require<ts::is_arithmetic_all<From, To>>,
     typename = ts::require<is_conversion_option<C>>>
-using policy = internal::policy_impl<From, To, C>;
+using policy = internal::policy<From, To, C>;
 
 //////////////////////// interface <<<<<<<<<<<<<<<<<<<<<<<<
 
