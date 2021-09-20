@@ -48,14 +48,14 @@ struct policy {
 };
 
 } // namespace internal
-//////////////////////// constraints ......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// constraints .......... >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename From, typename To, typename C,
     typename = ts::require<ts::is_arithmetic_all<From, To>>,
     typename = ts::require<is_conversion_option<C>>>
 using policy = internal::policy<From, To, C>;
 
-//////////////////////// constraints ......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// constraints .......... <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace cv
 
 #endif

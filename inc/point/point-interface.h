@@ -68,14 +68,14 @@ private:
     constexpr auto convert() const noexcept(cv::is_conversion_nothrow_v<C>);
 };
 
-//////////////////////// constraints ......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// constraints .......... >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T, typename C,
     typename = ts::require<std::is_trivial<point_impl<T, C>>>,
     typename = ts::require_not<std::is_default_constructible<point_impl<T, C>>>>
 using point_cpp17 = point_impl<T, C>;
 
-//////////////////////// constraints ......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// constraints .......... <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace cpp17
 inline namespace cpp20 {
 
@@ -108,16 +108,16 @@ private:
     constexpr auto convert() const noexcept(cv::is_conversion_nothrow_v<C>);
 };
 
-//////////////////////// constraints ......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// constraints .......... >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T, typename C,
     typename = ts::require<std::is_default_constructible<point_impl<T, C>>>,
     typename = ts::require_not<std::is_trivially_default_constructible<point_impl<T, C>>>>
 using point_cpp20 = point_impl<T, C>;
 
-//////////////////////// constraints ......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// constraints .......... <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace cpp20
-//////////////////////// versioning .......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// versioning ........... >>>>>>>>>>>>>>>>>>>>>>>>
 
 static_assert(
     ts::is_cpp17_compliant_v() or
@@ -145,9 +145,9 @@ template<typename T, typename C,
     typename = ts::require<cv::is_conversion_option<C>>>
 using point = select<ts::std_version::current>::template point<T, C>;
 
-//////////////////////// versioning .......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// versioning ........... <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace internal
-//////////////////////// constraints ......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// constraints .......... >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T, typename C = cv::truncate_on_narrowing,
     typename = ts::require<std::is_standard_layout<internal::point<T, C>>>,
@@ -160,8 +160,8 @@ template<typename T, typename C = cv::truncate_on_narrowing,
     typename = ts::require<std::is_trivially_destructible<internal::point<T, C>>>>
 using point = internal::point<T, C>;
 
-//////////////////////// constraints ......... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// types ............... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// constraints .......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// types ................ >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T>
 using point_v = point<T, cv::convert_on_narrowing>;
@@ -185,7 +185,7 @@ using point_16 = point<std::int16_t>;
 using point_32 = point<std::int32_t>;
 using point_64 = point<std::int64_t>;
 
-//////////////////////// types ............... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// types ................ <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace gx
 
 #include <point/point-impl.inl>
