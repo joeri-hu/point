@@ -161,7 +161,7 @@ template<typename T, typename C = cv::truncate_on_narrowing,
 using point = internal::point<T, C>;
 
 //////////////////////// constraints <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// types ..... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// types >>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T>
 using point_v = point<T, cv::convert_on_narrowing>;
@@ -185,7 +185,7 @@ using point_16 = point<std::int16_t>;
 using point_32 = point<std::int32_t>;
 using point_64 = point<std::int64_t>;
 
-//////////////////////// types ..... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// types <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace gx
 
 #include <point/point-impl.inl>

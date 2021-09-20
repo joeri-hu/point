@@ -14,9 +14,9 @@
 #include <utility>
 
 namespace gx::internal {
-//////////////////////// assignment ......... >>>>>>>>>>>>>>>>>>>>>>>>
-//////////////////////// .. compound ........ >>>>>>>>>>>>>>>>>>>>>>>>
-//////////////////////// ..... additive ..... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// assignment >>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >> compound >>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >>>>> additive >>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T1, typename T2, typename C>
 constexpr auto operator+=(point<T1, C>& lhs, point<T2, C> const& rhs)
@@ -52,8 +52,8 @@ noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>& {
     return lhs;
 }
 
-//////////////////////// ..... additive ..... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// ..... multiplicative >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// <<<<< additive <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// >>>>> multiplicative >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T1, typename T2, typename C>
 constexpr auto operator*=(point<T1, C>& lhs, point<T2, C> const& rhs)
@@ -106,11 +106,11 @@ noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>& {
     return lhs;
 }
 
-//////////////////////// ..... multiplicative <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// .. compound ........ <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// assignment ......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// <<<<< multiplicative <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// << compound <<<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// assignment <<<<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
 //////////////////////// increment/decrement  >>>>>>>>>>>>>>>>>>>>>>>>
-//////////////////////// .. prefix .......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >> prefix >>>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T, typename C>
 constexpr auto operator++(point<T, C>& src)
@@ -128,8 +128,8 @@ noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>& {
     return src;
 }
 
-//////////////////////// .. prefix .......... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// .. postfix ......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// << prefix <<<<<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// >> postfix >>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T, typename C>
 constexpr auto operator++(point<T, C>& src, int)
@@ -147,12 +147,12 @@ noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C> {
     return temp;
 }
 
-//////////////////////// .. postfix ......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// << postfix <<<<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
 //////////////////////// increment/decrement  <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// arithmetic ......... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// arithmetic >>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 inline namespace lvalue {
-//////////////////////// ..... additive ..... >>>>>>>>>>>>>>>>>>>>>>>>
-//////////////////////// ........ unary ..... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >>>>> additive >>>>> >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >>>>>>>> unary >>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T, typename C>
 constexpr auto operator+(point<T, C> const& src)
@@ -164,9 +164,9 @@ constexpr auto operator-(point<T, C> const& src)
 noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>
 { return {static_cast<T>(-src.x), static_cast<T>(-src.y)}; }
 
-//////////////////////// ........ unary ..... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// ..... additive ..... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// ..... selectors .... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// <<<<<<<< unary <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// <<<<< additive <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// >>>>> selectors >>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename F, typename T, typename U, typename C,
     typename R = std::common_type_t<point<T, C>, U>>
@@ -216,7 +216,7 @@ constexpr auto dispatch(
 ) noexcept(cv::is_conversion_nothrow_v<C>)
 { return (apply)(operation, rhs, lhs); }
 
-//////////////////////// ..... selectors .... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// <<<<< selectors <<<< <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace lvalue
 /*inline*/ namespace rvalue {
 
@@ -228,8 +228,8 @@ constexpr auto dispatch(
 //     A complete solution seems to incorporate expression templates, which
 // combines the best of both worlds. Maybe an idea for future development?
 
-//////////////////////// ..... additive ..... >>>>>>>>>>>>>>>>>>>>>>>>
-//////////////////////// ........ unary ..... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >>>>> additive >>>>> >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >>>>>>>> unary >>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T, typename C,
     typename = ts::require<std::is_same<T, ts::promote<T>>>>
@@ -245,9 +245,9 @@ noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>&& {
     return std::move(src);
 }
 
-//////////////////////// ........ unary ..... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// ..... additive ..... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// ..... selectors .... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// <<<<<<<< unary <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// <<<<< additive <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// >>>>> selectors >>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename F, typename T, typename C, typename U>
 constexpr auto apply(
@@ -285,10 +285,10 @@ constexpr auto dispatch(
 ) noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>&&
 { return (apply)(operation, std::move(lhs), rhs); }
 
-//////////////////////// ..... selectors .... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// <<<<< selectors <<<< <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace rvalue
-//////////////////////// .. universal ....... >>>>>>>>>>>>>>>>>>>>>>>>
-//////////////////////// ..... additive ..... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >> universal >>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >>>>> additive >>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T1, typename T2,
     typename = ts::require_either<
@@ -304,8 +304,8 @@ constexpr decltype(auto) operator-(T1&& lhs, T2&& rhs)
 noexcept(cv::is_conversion_nothrow_both_v<T1, T2>)
 { return (dispatch)(operator-=, std::forward<T1>(lhs), std::forward<T2>(rhs)); }
 
-//////////////////////// ..... additive ..... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// ..... multiplicative >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// <<<<< additive <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// >>>>> multiplicative >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T1, typename T2,
     typename = ts::require_either<
@@ -327,11 +327,11 @@ constexpr decltype(auto) operator%(T1&& lhs, T2&& rhs)
 noexcept(cv::is_conversion_nothrow_both_v<T1, T2>)
 { return (dispatch)(operator%=, std::forward<T1>(lhs), std::forward<T2>(rhs)); }
 
-//////////////////////// ..... multiplicative <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// .. universal ....... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// arithmetic ......... <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// comparison ......... >>>>>>>>>>>>>>>>>>>>>>>>
-//////////////////////// .. equality ........ >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// <<<<< multiplicative <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// << universal <<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// arithmetic <<<<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// comparison >>>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// >> equality >>>>>>>> >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename T1, typename T2, typename C>
 constexpr auto operator==(point<T1, C> const& lhs, point<T2, C> const& rhs)
@@ -343,11 +343,11 @@ constexpr auto operator!=(point<T1, C> const& lhs, point<T2, C> const& rhs)
 noexcept(cv::is_conversion_nothrow_v<C>) -> bool
 { return not (lhs == rhs); }
 
-//////////////////////// .. equality ........ <<<<<<<<<<<<<<<<<<<<<<<<
-//////////////////////// comparison ......... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// << equality <<<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// comparison <<<<<<<<< <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace gx::internal
 
-//////////////////////// specializations .... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// specializations >>>> >>>>>>>>>>>>>>>>>>>>>>>>
 namespace ts {
 
 template<typename T1, typename T2, typename C>
@@ -367,6 +367,6 @@ struct compnd_op<gx::point<T, C>>
     : compnd_op<T, gx::point<T, C>> {};
 
 } // namespace ts
-//////////////////////// specializations .... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// specializations <<<< <<<<<<<<<<<<<<<<<<<<<<<<
 
 #endif
