@@ -11,14 +11,14 @@ union conversion {
     class throw_on_out_of_range : option {};
 };
 
-//////////////////////// helpers >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// helpers ............. >>>>>>>>>>>>>>>>>>>>>>>>
 
 using truncate_on_narrowing = conversion::truncate_on_narrowing;
 using convert_on_narrowing  = conversion::convert_on_narrowing;
 using assert_on_narrowing   = conversion::assert_on_narrowing;
 using throw_on_out_of_range = conversion::throw_on_out_of_range;
 
-//////////////////////// helpers <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// helpers ............. <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace cv
 
 #endif

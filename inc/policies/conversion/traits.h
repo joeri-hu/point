@@ -32,7 +32,7 @@ template<typename... Cs>
 struct is_conversion_nothrow_neither
     : std::negation<is_conversion_nothrow_either<Cs>...> {};
 
-//////////////////////// helpers >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// helpers ............. >>>>>>>>>>>>>>>>>>>>>>>>
 
 template<typename C>
 inline constexpr auto is_conversion_option_v
@@ -58,7 +58,7 @@ template<typename... Cs>
 inline constexpr auto is_conversion_nothrow_neither_v
     = bool{is_conversion_nothrow_neither<Cs...>{}};
 
-//////////////////////// helpers <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// helpers ............. <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace cv
 
 #endif
