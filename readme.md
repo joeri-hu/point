@@ -14,7 +14,7 @@
   compiler to emit warnings or errors.<li><i>assert_on_narrowing</li></i>  Applies a static assertion. If a narrowing conversion is required, a
   compiler error is generated. Applies an implicit conversion otherwise.<li><i>throw_on_out_of_range:</li></i>  Applies a run-time range-check if a narrowing conversion is required.
   When the original value exceeds the limits of the resulting arithmetic
-  type, a std::out_of_range exception is thrown.</ul><h3>To-do</h3><ul><li>Add more examples<ul><li>Operator usage</il></ul><li>Add unit-tests<ul><li>Type checking</li><li>Calculations</li></ul><li>Add debugging wrapper</li></ul><h3>Live code</h3><ul><li><a href="https://godbolt.org/z/Ed99sf1E6">godbolt.org/z/Ed99sf1E6</a></li></ul></pre>
+  type, a std::out_of_range exception is thrown.</ul><h3>To-do</h3><ul><li>Add more examples<ul><li>Operator usage</il></ul><li>Add unit-tests<ul><li>Type checking</li><li>Calculations</li></ul><li>Add debugging wrapper</li></ul><h3>Live code</h3><ul><li><a href="https://godbolt.org/z/osvaqb4sW">godbolt.org/z/osvaqb4sW</a></li></ul></pre>
 
 ## Examples
 
