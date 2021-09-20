@@ -157,7 +157,7 @@ point_v<short> pv2{static_cast<point_v<short>>(p1)};
 using gx::point;   // conversion: truncate_on_narrowing (default)
 using gx::point_r; // conversion: throw_on_out_of_range
 
-constexpr auto p1 = point<int>{3, 5};   // ok, copy-initialization
+constexpr auto p1 = point<int>{3, 5};    // ok, copy-initialization
 constexpr auto pr1 = point_r<int>{3, 5}; // ok, copy-initialization
 
 ////////////////////////////////////////////////////////////////////////
@@ -183,7 +183,7 @@ constexpr auto prn = point_r<int>{-1, -1}; // ok, copy-initialization
 constexpr point_r<int> pr2{prn};           // ok, direct-initialization
 constexpr point_r<short> pr2 = prn;        // ok, copy-initialization
 
- // error, implicit conversion + direct-init
+// error, implicit conversion + direct-init
 constexpr point_r<unsigned> pr2{prn};
 
 // error, value of prn is out of range of pr2
