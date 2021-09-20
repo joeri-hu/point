@@ -183,7 +183,7 @@ constexpr auto apply(
 template<typename T1, typename T2, typename C,
     typename = ts::require<ts::common_type_matches_lhs<T1, T2>>>
 constexpr auto dispatch(
-    compnd_op_t<T1, point<T2, C>> operation,
+    ts::compnd_op_t<T1, point<T2, C>> operation,
     point<T1, C> const& lhs,
     point<T2, C> const& rhs
 ) noexcept(cv::is_conversion_nothrow_v<C>)
@@ -192,7 +192,7 @@ constexpr auto dispatch(
 template<typename T1, typename T2, typename C,
     typename = ts::require<ts::is_converting_lhs<T1, T2>>>
 constexpr auto dispatch(
-    compnd_op_t<T2, point<T1, C>> operation,
+    ts::compnd_op_t<T2, point<T1, C>> operation,
     point<T1, C> const& lhs,
     point<T2, C> const& rhs
 ) noexcept(cv::is_conversion_nothrow_v<C>)
@@ -201,7 +201,7 @@ constexpr auto dispatch(
 template<typename T, typename U, typename C,
     typename = ts::require<std::is_arithmetic<U>>>
 constexpr auto dispatch(
-    compnd_op_t<point<T, C>, U> operation,
+    ts::compnd_op_t<point<T, C>, U> operation,
     point<T, C> const& lhs,
     U rhs
 ) noexcept(cv::is_conversion_nothrow_v<C>)
@@ -210,7 +210,7 @@ constexpr auto dispatch(
 template<typename U, typename T, typename C,
     typename = ts::require<std::is_arithmetic<U>>>
 constexpr auto dispatch(
-    compnd_op_t<point<T, C>, U> operation,
+    ts::compnd_op_t<point<T, C>, U> operation,
     U lhs,
     point<T, C> const& rhs
 ) noexcept(cv::is_conversion_nothrow_v<C>)
@@ -262,7 +262,7 @@ constexpr auto apply(
 template<typename T, typename C, typename U,
     typename = ts::require<ts::common_type_matches_lhs<point<T, C>, U>>>
 constexpr auto dispatch(
-    compnd_op_t<point<T, C>, U> operation,
+    ts::compnd_op_t<point<T, C>, U> operation,
     point<T, C>&& lhs,
     U const& rhs
 ) noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>&&
@@ -271,7 +271,7 @@ constexpr auto dispatch(
 template<typename U, typename T, typename C,
     typename = ts::require<ts::common_type_matches_rhs<U, point<T, C>>>>
 constexpr auto dispatch(
-    compnd_op_t<point<T, C>, U> operation,
+    ts::compnd_op_t<point<T, C>, U> operation,
     U const& lhs,
     point<T, C>&& rhs
 ) noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>&&
@@ -279,7 +279,7 @@ constexpr auto dispatch(
 
 template<typename T, typename C>
 constexpr auto dispatch(
-    compnd_op_t<point<T, C>> operation,
+    ts::compnd_op_t<point<T, C>> operation,
     point<T, C>&& lhs,
     point<T, C>&& rhs
 ) noexcept(cv::is_conversion_nothrow_v<C>) -> point<T, C>&&
