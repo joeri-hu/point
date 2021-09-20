@@ -44,7 +44,7 @@ noexcept(cv::is_conversion_nothrow_v<C>) {
 
 } // namespace gx::internal
 
-//////////////////////// specializations ...... >>>>>>>>>>>>>>>>>>>>>>>>
+//////////////////////// specializations >>>>>>>>>>>>>>>>>>>>>>>>
 namespace cv {
 
 template<typename T, typename C>
@@ -71,4 +71,4 @@ struct common_type<gx::point<T1, C>, gx::point<T2, C>>
     : common_type<gx::point<T1, C>, T2> {};
 
 } // namespace std
-//////////////////////// specializations ...... <<<<<<<<<<<<<<<<<<<<<<<<
+//////////////////////// specializations <<<<<<<<<<<<<<<<<<<<<<<<
