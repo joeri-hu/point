@@ -41,7 +41,8 @@ struct policy {
     static constexpr auto convert<throw_on_out_of_range>(From src)
     noexcept(is_conversion_nothrow_v<C>) -> To {
         if (gl::is_out_of_range<From, To>(src)) {
-            throw std::out_of_range{"conversion results in information loss"};
+            throw std::out_of_range{
+                "source value is outside the range of destination type"};
         }
         return convert<truncate_on_narrowing>(src);
     }
