@@ -3,8 +3,9 @@
 
 namespace cv {
 
-union conversion {
-    class option {};
+struct conversion {
+    conversion() = delete;
+    class option { option() = delete; };
     class truncate_on_narrowing : option {};
     class convert_on_narrowing  : option {};
     class assert_on_narrowing   : option {};

@@ -188,5 +188,5 @@ using point_64 = point<std::int64_t>;
 //////////////////////// types <<<<< <<<<<<<<<<<<<<<<<<<<<<<<
 } // namespace gx
 
-#include <point/point-impl.inl>
+#include <point/point-impl.tcc>
 #endif
