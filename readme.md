@@ -14,7 +14,7 @@
   compiler to emit warnings or errors.<li><i>assert_on_narrowing</li></i>  Applies a static assertion. If a narrowing conversion is required, a
   compiler error is generated. Applies an implicit conversion otherwise.<li><i>throw_on_out_of_range:</li></i>  Applies a run-time range-check if a narrowing conversion is required.
   When the original value exceeds the limits of the resulting arithmetic
-  type, a std::out_of_range exception is thrown.</ul><h3>To-do</h3><ul><li>Add more examples<ul><li>Operator usage</il></ul><li>Add unit-tests<ul><li>Type checking</li><li>Calculations</li></ul><li>Add debugging wrapper</li><li>Explore the possibility of supporting custom (trivial/POD/ADT) types</li></ul><h3>Live code</h3><ul><li><a href="https://godbolt.org/z/osvaqb4sW">godbolt.org/z/osvaqb4sW</a></li></ul></pre>
+  type, a std::out_of_range exception is thrown.</ul><h3>To-do</h3><ul><li>Add more examples<ul><li>Operator usage</il></ul><li>Add unit-tests<ul><li>Type checking</li><li>Calculations</li></ul><li>Add debugging wrapper</li><li>Explore the possibility of supporting custom (trivial/POD/ADT) types</li></ul><h3>Live code</h3><ul><li><a href="https://godbolt.org/z/neh3zbd1G">godbolt.org/z/neh3zbd1G</a></li></ul></pre>
 
 ## Examples
 
@@ -24,9 +24,19 @@ behavior which could be considered to be less intuitive.
 The maximum value of the built-in types is implementation defined. While trying<br>
 to keep things concise, the examples below assume the following condition:
 
-<pre>max <b>short int</b> < max <b>int</b> < max <b>long int</b> == max <b>long long int</b></pre>
+<pre>max. <b>short int</b> < max. <b>int</b> < max. <b>long int</b> == max. <b>long long int</b></pre>
 
 ### Initialization
+
+Because `point` is an aggregate type, it is important to consider some of the<br>
+nuances that are involved when initializing objects. The use of the equals sign<br>
+is needed when an intiuive conversion is required during initialization.
+
+The syntax `T object { arg };` is considered to be a form of direct<br>
+initialization if `T` is a non-class type. When class types are initialized with<br>
+a braced-init-list, list-initialization is in effect. If `T` is an aggregate,<br>
+aggregate initialization is performed. With aggregate initialization, implicit<br>
+conversions are only allowed by means of copy-initialization.
 
 ```c++
 using gx::point; // conversion: truncate_on_narrowing (default)

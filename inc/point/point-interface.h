@@ -44,28 +44,23 @@ public:
 
     template<typename U>
     constexpr operator point_impl<U, C>() const
-    noexcept(cv::is_conversion_nothrow_v<C>);
-
-    template<typename V>
-    constexpr explicit operator point_impl<T, V>() const noexcept;
+    noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 
     template<typename U, typename V>
     constexpr explicit operator point_impl<U, V>() const
-    noexcept(cv::is_conversion_nothrow_v<C>);
-
-    template<template<typename, typename...> typename P, typename... Ts,
-        typename = ts::require_not<ts::template_matches<P, point_impl>>>
-    constexpr operator P<T, Ts...>() const noexcept;
+    noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 
     template<template<typename, typename...> typename P, typename U, typename... Ts,
         typename = ts::require_not<ts::template_matches<P, point_impl>>>
-    constexpr operator P<U, Ts...>() const noexcept(cv::is_conversion_nothrow_v<C>);
+    constexpr operator P<U, Ts...>() const
+    noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 
     T x;
     T y;
+
 private:
     template<template<typename, typename...> typename P, typename U, typename... Ts>
-    constexpr auto convert() const noexcept(cv::is_conversion_nothrow_v<C>);
+    constexpr auto convert() const noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 };
 
 //////////////////////// constraints >>>>>>>>>>>>>>>>>>>>>>>>
@@ -84,28 +79,23 @@ class point_impl {
 public:
     template<typename U>
     constexpr operator point_impl<U, C>() const
-    noexcept(cv::is_conversion_nothrow_v<C>);
-
-    template<typename V>
-    constexpr explicit operator point_impl<T, V>() const noexcept;
+    noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 
     template<typename U, typename V>
     constexpr explicit operator point_impl<U, V>() const
-    noexcept(cv::is_conversion_nothrow_v<C>);
-
-    template<template<typename, typename...> typename P, typename... Ts,
-        typename = ts::require_not<ts::template_matches<P, point_impl>>>
-    constexpr operator P<T, Ts...>() const noexcept;
+    noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 
     template<template<typename, typename...> typename P, typename U, typename... Ts,
         typename = ts::require_not<ts::template_matches<P, point_impl>>>
-    constexpr operator P<U, Ts...>() const noexcept(cv::is_conversion_nothrow_v<C>);
+    constexpr operator P<U, Ts...>() const
+    noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 
     T x{};
     T y{};
+
 private:
     template<template<typename, typename...> typename P, typename U, typename... Ts>
-    constexpr auto convert() const noexcept(cv::is_conversion_nothrow_v<C>);
+    constexpr auto convert() const noexcept(cv::is_conversion_nothrow_v<T, U, C>);
 };
 
 //////////////////////// constraints >>>>>>>>>>>>>>>>>>>>>>>>
